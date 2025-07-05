@@ -21,7 +21,7 @@ struct
     __uint(type, BPF_MAP_TYPE_HASH);
     __uint(max_entries, MAX_ENTRIES);
     __type(key, __u32);
-    __type(values, struct event);
+    __type(value, struct event);
 } values SEC(".maps");
 
 static int probe_entry(pid_t tpid, int sig)
