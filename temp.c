@@ -36,4 +36,4 @@ int tracepoint__syscalls__sys_enter_execve(struct trace_event_raw_sys_enter* ctx
     bpf_perf_event_output(ctx, &events, BPF_F_CURRENT_CPU, &event, sizeof(event));
 
     return 0;
-}
+}const volatile struct event * __eunomia_dummy_event_ptr  __attribute__((unused));
