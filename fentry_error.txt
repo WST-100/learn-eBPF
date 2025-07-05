@@ -1,0 +1,253 @@
+==============================================
+use BPF_CORE_READ
+
+ws@ws:~/alibaba$ ./ecc fentry-link.bpf.c
+INFO [ecc_rs::bpf_compiler] Compiling bpf object...
+INFO [ecc_rs::bpf_compiler] $ "clang" CommandArgs { inner: ["-g", "-O2", "-target", "bpf", "-Wno-unknown-attributes", "-D__TARGET_ARCH_x86", "-idirafter", "/usr/lib/llvm-15/lib/clang/15.0.7/include", "-idirafter", "/usr/local/include", "-idirafter", "/usr/include/x86_64-linux-gnu", "-idirafter", "/usr/include", "-I/tmp/.tmpkcIMeU/include", "-I/tmp/.tmpkcIMeU/include/vmlinux/x86", "-I/home/ws/alibaba", "-c", "fentry-link.bpf.c", "-o", "fentry-link.bpf.o"] }
+INFO [ecc_rs::bpf_compiler] 
+ERROR [ecc_rs::bpf_compiler] fentry-link.bpf.c:22:32: error: expected identifier
+int BPF_FROG(do_unlinkat_exit, int dfd, struct filename* name, long ret)
+                               ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:520:11: note: expanded from macro 'BPF_CORE_READ'
+        ___type((src), a, ##__VA_ARGS__) __r;                               \
+                 ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:391:38: note: expanded from macro '___type'
+#define ___type(...) typeof(___arrow(__VA_ARGS__))
+                                     ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:389:64: note: expanded from macro '___arrow'
+#define ___arrow(...) ___apply(___arrow, ___narg(__VA_ARGS__))(__VA_ARGS__)
+                                                               ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:380:25: note: expanded from macro '___arrow2'
+#define ___arrow2(a, b) a->b
+                        ^
+/tmp/.tmpkcIMeU/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:36: error: member reference type 'int' is not a pointer
+    filename = BPF_CORE_READ(name, name);
+               ~~~~~~~~~~~~~~~~~~~~^~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:520:17: note: expanded from macro 'BPF_CORE_READ'
+        ___type((src), a, ##__VA_ARGS__) __r;                               \
+        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:391:38: note: expanded from macro '___type'
+#define ___type(...) typeof(___arrow(__VA_ARGS__))
+                            ~~~~~~~~~^~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:389:64: note: expanded from macro '___arrow'
+#define ___arrow(...) ___apply(___arrow, ___narg(__VA_ARGS__))(__VA_ARGS__)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:380:28: note: expanded from macro '___arrow2'
+#define ___arrow2(a, b) a->b
+                        ~  ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:521:28: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+                                  ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:429:14: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                           ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:420:13: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ^
+note: (skipping 3 expansions in backtrace; use -fmacro-backtrace-limit=0 to see all)
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:379:22: note: expanded from macro '___arrow1'
+#define ___arrow1(a) a
+                     ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:394:44: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+                                                  ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^
+/tmp/.tmpkcIMeU/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:521:28: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+                                  ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:429:14: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                           ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:420:13: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:413:33: note: expanded from macro '___core_read0'
+        ___read(fn, dst, ___type(src), src, a);
+                                       ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:394:54: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+                                                            ^
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^
+/tmp/.tmpkcIMeU/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:36: error: member reference type 'typeof (((none)))' (aka 'int') is not a pointer
+    filename = BPF_CORE_READ(name, name);
+               ~~~~~~~~~~~~~~~~~~~~^~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:521:34: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:429:20: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                     ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:420:18: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:413:38: note: expanded from macro '___core_read0'
+        ___read(fn, dst, ___type(src), src, a);
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:394:61: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+/tmp/.tmpkcIMeU/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^~~
+fentry-link.bpf.c:29:78: error: use of undeclared identifier 'ret'
+    bpf_printk("fexit: pid = %d, filename = %s, ret = %ld\n", pid, filename, ret);
+                                                                             ^
+7 errors generated.
+
+Error: Failed to compile
+
+Caused by:
+    Failed to run clang(exit code = Some(1))
+
+
+========================================================================
+no use BPF_CORE_READ
+
+ws@ws:~/alibaba$ ./ecc fentry-link.bpf.c
+INFO [ecc_rs::bpf_compiler] Compiling bpf object...
+INFO [ecc_rs::bpf_compiler] $ "clang" CommandArgs { inner: ["-g", "-O2", "-target", "bpf", "-Wno-unknown-attributes", "-D__TARGET_ARCH_x86", "-idirafter", "/usr/lib/llvm-15/lib/clang/15.0.7/include", "-idirafter", "/usr/local/include", "-idirafter", "/usr/include/x86_64-linux-gnu", "-idirafter", "/usr/include", "-I/tmp/.tmpdxN2nM/include", "-I/tmp/.tmpdxN2nM/include/vmlinux/x86", "-I/home/ws/alibaba", "-c", "fentry-link.bpf.c", "-o", "fentry-link.bpf.o"] }
+INFO [ecc_rs::bpf_compiler] 
+ERROR [ecc_rs::bpf_compiler] fentry-link.bpf.c:22:32: error: expected identifier
+int BPF_FROG(do_unlinkat_exit, int dfd, struct filename* name, long ret)
+                               ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:520:11: note: expanded from macro 'BPF_CORE_READ'
+        ___type((src), a, ##__VA_ARGS__) __r;                               \
+                 ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:391:38: note: expanded from macro '___type'
+#define ___type(...) typeof(___arrow(__VA_ARGS__))
+                                     ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:389:64: note: expanded from macro '___arrow'
+#define ___arrow(...) ___apply(___arrow, ___narg(__VA_ARGS__))(__VA_ARGS__)
+                                                               ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:380:25: note: expanded from macro '___arrow2'
+#define ___arrow2(a, b) a->b
+                        ^
+/tmp/.tmpdxN2nM/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:36: error: member reference type 'int' is not a pointer
+    filename = BPF_CORE_READ(name, name);
+               ~~~~~~~~~~~~~~~~~~~~^~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:520:17: note: expanded from macro 'BPF_CORE_READ'
+        ___type((src), a, ##__VA_ARGS__) __r;                               \
+        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:391:38: note: expanded from macro '___type'
+#define ___type(...) typeof(___arrow(__VA_ARGS__))
+                            ~~~~~~~~~^~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:389:64: note: expanded from macro '___arrow'
+#define ___arrow(...) ___apply(___arrow, ___narg(__VA_ARGS__))(__VA_ARGS__)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:380:28: note: expanded from macro '___arrow2'
+#define ___arrow2(a, b) a->b
+                        ~  ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:521:28: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+                                  ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:429:14: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                           ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:420:13: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ^
+note: (skipping 3 expansions in backtrace; use -fmacro-backtrace-limit=0 to see all)
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:379:22: note: expanded from macro '___arrow1'
+#define ___arrow1(a) a
+                     ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:394:44: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+                                                  ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^
+/tmp/.tmpdxN2nM/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:30: error: use of undeclared identifier 'name'; did you mean 'none'?
+    filename = BPF_CORE_READ(name, name);
+                             ^~~~
+                             none
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:521:28: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+                                  ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:429:14: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                           ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:420:13: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:413:33: note: expanded from macro '___core_read0'
+        ___read(fn, dst, ___type(src), src, a);
+                                       ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:394:54: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+                                                            ^
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^
+/tmp/.tmpdxN2nM/include/vmlinux/x86/vmlinux.h:95197:2: note: 'none' declared here
+        none = 0,
+        ^
+fentry-link.bpf.c:28:36: error: member reference type 'typeof (((none)))' (aka 'int') is not a pointer
+    filename = BPF_CORE_READ(name, name);
+               ~~~~~~~~~~~~~~~~~~~~^~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:521:34: note: expanded from macro 'BPF_CORE_READ'
+        BPF_CORE_READ_INTO(&__r, (src), a, ##__VA_ARGS__);                  \
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:429:20: note: expanded from macro 'BPF_CORE_READ_INTO'
+                     dst, (src), a, ##__VA_ARGS__)                          \
+                     ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:420:18: note: expanded from macro '___core_read'
+                                                      src, a, ##__VA_ARGS__)
+                                                      ~~~~~^~~~~~~~~~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:413:38: note: expanded from macro '___core_read0'
+        ___read(fn, dst, ___type(src), src, a);
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:394:61: note: expanded from macro '___read'
+        read_fn((void *)(dst), sizeof(*(dst)), &((src_type)(src))->accessor)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+/tmp/.tmpdxN2nM/include/bpf/bpf_core_read.h:312:79: note: expanded from macro 'bpf_core_read'
+        bpf_probe_read_kernel(dst, sz, (const void *)__builtin_preserve_access_index(src))
+                                                                                     ^~~
+fentry-link.bpf.c:29:78: error: use of undeclared identifier 'ret'
+    bpf_printk("fexit: pid = %d, filename = %s, ret = %ld\n", pid, filename, ret);
+                                                                             ^
+7 errors generated.
+
+Error: Failed to compile
+
+Caused by:
+    Failed to run clang(exit code = Some(1))
+
