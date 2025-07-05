@@ -4,7 +4,7 @@
 #include <bpf/bpf_core_read.h>
 #include "execsnoop.h"
 
-char LICENSE SEC("license") = "Dual BSD/GPL";
+char LICENSE[] SEC("license") = "Dual BSD/GPL";
 
 struct
 {
@@ -31,9 +31,9 @@ int tracepoint__syscalls__sys_enter_execve(struct trace_event_raw_sys_enter* ctx
     task = (struct task_struct*)bpf_get_current_task();
     event.ppid = BPF_CORE_READ(task, real_parent, tgid);
     char* cmd_ptr = (char*)BPF_CORE_READ(ctx, args[0]);
-    bpf_probe_read_str(&event.comm, sizeof(event.comm), cmd_str);
+    bpf_probe_read_str(&event.comm, sizeof(event.comm), cmd_ptr);
 
     bpf_perf_event_output(ctx, &events, BPF_F_CURRENT_CPU, &event, sizeof(event));
 
     return 0;
-}const volatile struct event * __eunomia_dummy_event_ptr  __attribute__((unused));
+}

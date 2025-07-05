@@ -1,1 +1,0 @@
-{"bpf_skel":{"data_sections":[{"name":".bss","variables":[{"name":"__eunomia_dummy_event_ptr","type":"struct event *"}]}],"maps":[{"ident":"bss","mmaped":true,"name":"execsnoo.bss"}],"obj_name":"execsnoop_bpf","progs":null},"eunomia_version":"0.3.4","export_types":[]}
